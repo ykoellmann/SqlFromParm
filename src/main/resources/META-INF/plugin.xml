@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<idea-plugin>
+    <id>com.sqlfromparm</id>
+    <name>ParmFiller</name>
+    <vendor>Yannik Köllmann</vendor>
+
+    <description>
+        IntelliJ/Rider plugin that analyzes ParmBuilder variables during debugging.
+        It extracts SQL parameter values and reconstructs the final SQL statement
+        with all placeholders replaced. The result is copied to the clipboard for easy use.
+    </description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <actions>
+        <action id="com.ykoellmann.sqlfromparm.ParmEvalAction"
+                class="com.ykoellmann.sqlfromparm.ParmEvalAction"
+                text="Replace Parm SQL"
+                description="Extracts and evaluates ParmBuilder variables and produces complete SQL with substituted parameters.">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl R" second-keystroke="C"/>
+        </action>
+    </actions>
+</idea-plugin>

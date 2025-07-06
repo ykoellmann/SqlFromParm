@@ -1,0 +1,23 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <!-- SQL Document (left) -->
+    <rect x="4" y="8" width="20" height="28" rx="2" ry="2" fill="#e0e0e0" stroke="#000" stroke-width="1.5"/>
+    <text x="14" y="18" font-family="Arial" font-size="4" fill="#000" text-anchor="middle">SELECT *</text>
+    <text x="14" y="26" font-family="Courier New" font-size="4" fill="red" text-anchor="middle">{Parm}</text>
+
+    <!-- Arrow (center) -->
+    <path d="M26 22 L38 22 M34 18 L38 22 L34 26" stroke="#000" stroke-width="1.5" fill="none"/>
+
+    <!-- Clipboard (right) -->
+    <rect x="40" y="14" width="20" height="28" rx="2" ry="2" fill="#ffffff" stroke="#000" stroke-width="1.5"/>
+    <!-- Clip -->
+    <rect x="46" y="10" width="8" height="5" rx="1" fill="#000"/>
+    <!-- Date text centered inside clipboard -->
+    <text x="50" y="24" font-family="Courier New" font-size="4" fill="#000" text-anchor="middle">SELECT*</text>
+    <text x="50" y="32" font-family="Courier New" font-size="4" fill="green" text-anchor="middle">365</text>
+
+    <!-- Database symbol (bottom center) -->
+    <ellipse cx="32" cy="52" rx="10" ry="3.5" fill="#999"/>
+    <rect x="22" y="52" width="20" height="7" fill="#999"/>
+    <ellipse cx="32" cy="59" rx="10" ry="3.5" fill="#999"/>
+    <ellipse cx="32" cy="52" rx="10" ry="3.5" fill="#666" fill-opacity="0.3"/>
+</svg>
