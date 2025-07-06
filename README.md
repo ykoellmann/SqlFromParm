@@ -47,3 +47,14 @@ Ctrl + R, C — Evaluate Parm Variable
 
 ## 🧠 Author
 Developed by Yannik Köllmann
+
+## 📄 License
+
+This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** license.
+
+You are free to use, modify, and share this plugin for personal, educational, and open-source purposes.
+
+**Commercial use is not allowed** without explicit permission.
+
+See the [LICENSE](LICENSE) file for full terms.  
+Learn more: [https://creativecommons.org/licenses/by-nc/4.0](https://creativecommons.org/licenses/by-nc/4.0)
