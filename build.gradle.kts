@@ -20,7 +20,6 @@ dependencies {
     intellijPlatform {
         rider("2025.1", useInstaller = false)
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
-        
         // Add necessary plugin dependencies for compilation here, example:
         // bundledPlugin("com.intellij.java")
     }
@@ -31,7 +30,7 @@ intellijPlatform {
         ideaVersion {
             sinceBuild = "251"
         }
-        
+
 
         changeNotes = """
       Initial version

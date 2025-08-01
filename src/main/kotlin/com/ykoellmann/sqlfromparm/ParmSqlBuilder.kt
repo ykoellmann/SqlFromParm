@@ -1,8 +1,11 @@
 package com.ykoellmann.sqlfromparm
 
 import com.intellij.openapi.diagnostic.Logger
+import com.intellij.openapi.util.NlsContexts
+import com.intellij.xdebugger.frame.XFullValueEvaluator
 import com.intellij.xdebugger.impl.ui.tree.nodes.MessageTreeNode
 import com.intellij.xdebugger.impl.ui.tree.nodes.XValueNodeImpl
+import java.awt.Font
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
@@ -33,7 +36,7 @@ class ParmSqlBuilder {
 
         // Look for "Key" and "Value" child nodes, or recurse deeper
         children.forEach { child ->
-            val raw = child.rawValue?.trim()
+            val raw = fullValue(child)
             when (child.name) {
                 "Key" -> key = raw
                 "Value" -> value = tryFormatDateTime(raw) ?: raw
@@ -45,6 +48,21 @@ class ParmSqlBuilder {
         if (key != null && value != null) {
             params[key!!] = value!!
         }
+    }
+
+    public fun fullValue(node: XValueNodeImpl): String {
+        var fullValue = ""
+        node.fullValueEvaluator!!.startEvaluation(object : XFullValueEvaluator.XFullValueEvaluationCallback{
+            override fun evaluated(p0: String, p1: Font?) {
+                fullValue = p0
+            }
+
+            override fun errorOccurred(p0: @NlsContexts.DialogMessage String) {
+                TODO("Not yet implemented")
+            }
+        })
+
+        return fullValue
     }
 
     /**
