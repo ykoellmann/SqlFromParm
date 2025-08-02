@@ -1,1 +1,1 @@
-rootProject.name = "SqlFromParm"
+rootProject.name = "parmfiller"

@@ -1,7 +1,6 @@
-package com.ykoellmann.sqlfromparm
+package com.ykoellmann.parmfiller
 
 import com.intellij.openapi.diagnostic.Logger
-import com.intellij.openapi.util.NlsContexts
 import com.intellij.xdebugger.frame.XFullValueEvaluator
 import com.intellij.xdebugger.impl.ui.tree.nodes.MessageTreeNode
 import com.intellij.xdebugger.impl.ui.tree.nodes.XValueNodeImpl
@@ -36,10 +35,10 @@ class ParmSqlBuilder {
 
         // Look for "Key" and "Value" child nodes, or recurse deeper
         children.forEach { child ->
-            val raw = fullValue(child)
+            val fullValue = getNodeFullValue(child)
             when (child.name) {
-                "Key" -> key = raw
-                "Value" -> value = tryFormatDateTime(raw) ?: raw
+                "Key" -> key = fullValue
+                "Value" -> value = formatValue(child.valuePresentation!!.type!!, fullValue)
                 else -> collectParams(child)
             }
         }
@@ -50,19 +49,37 @@ class ParmSqlBuilder {
         }
     }
 
-    public fun fullValue(node: XValueNodeImpl): String {
-        var fullValue = ""
-        node.fullValueEvaluator!!.startEvaluation(object : XFullValueEvaluator.XFullValueEvaluationCallback{
-            override fun evaluated(p0: String, p1: Font?) {
-                fullValue = p0
+    fun formatValue(type: String, raw: String): String {
+        val lowerType = type.lowercase()
+        return when {
+            lowerType in listOf("int", "long", "short", "decimal", "double", "float") -> raw
+            lowerType == "bool" -> if (raw == "true") "1" else "0"
+            lowerType == "string" || lowerType == "char" -> "'${raw.replace("'", "''")}'"
+            lowerType == "datetime" || lowerType == "datetimeoffset" -> "'${tryFormatDateTime(raw)}'"
+            lowerType == "guid" -> "'$raw'"
+            raw == "null" || raw == "DBNull" -> "NULL"
+            else -> raw // fallback
+        }
+    }
+
+    fun getNodeFullValue(node: XValueNodeImpl): String {
+        val latch = java.util.concurrent.CountDownLatch(1)
+        var result: String? = null
+
+        node.fullValueEvaluator!!.startEvaluation(object : XFullValueEvaluator.XFullValueEvaluationCallback {
+            override fun evaluated(value: String, font: Font?) {
+                result = value
+                latch.countDown()
             }
 
-            override fun errorOccurred(p0: @NlsContexts.DialogMessage String) {
-                TODO("Not yet implemented")
+            override fun errorOccurred(errorMessage: String) {
+                result = "ERROR: $errorMessage"
+                latch.countDown()
             }
         })
 
-        return fullValue
+        latch.await() // Blockiert bis evaluated() oder errorOccurred() aufgerufen wurde
+        return result ?: ""
     }
 
     /**

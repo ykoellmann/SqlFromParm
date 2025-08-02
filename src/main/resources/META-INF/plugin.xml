@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <idea-plugin>
-    <id>com.sqlfromparm</id>
+    <id>com.parmfiller</id>
     <name>ParmFiller</name>
     <vendor>Yannik Köllmann</vendor>
+    <version>1.0.0</version>
 
     <description>
         IntelliJ/Rider plugin that analyzes ParmBuilder variables during debugging.
@@ -14,8 +15,8 @@
     <depends>com.intellij.modules.rider</depends>
 
     <actions>
-        <action id="com.ykoellmann.sqlfromparm.ParmEvalAction"
-                class="com.ykoellmann.sqlfromparm.ParmEvalAction"
+        <action id="com.ykoellmann.parmfiller.ParmEvalAction"
+                class="com.ykoellmann.parmfiller.ParmEvalAction"
                 text="Replace Parm SQL"
                 description="Extracts and evaluates ParmBuilder variables and produces complete SQL with substituted parameters.">
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl R" second-keystroke="C"/>

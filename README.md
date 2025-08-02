@@ -1,4 +1,4 @@
-# SqlFromParm
+# parmfiller
 JetBrains plugin for evaluating SQL parameter objects (e.g. ParmBuilder) at debug time and generating the final SQL with all values replaced.
 
 During a debugging session, the plugin extracts the raw SQL query and all associated parameters, replaces the placeholders (e.g. `@ParmX`) with their actual values, and copies the final SQL to the clipboard — ready to run.

@@ -4,7 +4,7 @@ plugins {
     id("org.jetbrains.intellij.platform") version "2.5.0"
 }
 
-group = "com.ykoellmann.sqlFromParm"
+group = "com.ykoellmann.parmfiller"
 version = "1.0.0"
 
 repositories {
@@ -21,7 +21,6 @@ dependencies {
         rider("2025.1", useInstaller = false)
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
         // Add necessary plugin dependencies for compilation here, example:
-        // bundledPlugin("com.intellij.java")
     }
 }
 
